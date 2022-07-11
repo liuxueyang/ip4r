@@ -13,10 +13,8 @@ function pkg() {
     pushd /home/gpadmin/ip4r_artifacts
     local last_release_path
     last_release_path=$(readlink -e /home/gpadmin/last_released_ip4r_bin/ip4r-*.tar.gz)
-    cmake /home/gpadmin/ip4r_src \
-        -DIP4R_LAST_RELEASE_PATH="${last_release_path}" \
-        -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"
-    cmake --build . --target create_artifact
+    make clean
+    make install
     popd
 }
 

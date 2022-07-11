@@ -6,7 +6,6 @@ inputs:
   - name: ip4r_src
   - name: bin_ip4r
   - name: gpdb_src
-  - name: bin_cmake
 
 run:
   path: ip4r_src/concourse/scripts/entry.sh

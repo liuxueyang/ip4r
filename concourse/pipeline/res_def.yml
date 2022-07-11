@@ -287,13 +287,6 @@ resources:
     regexp: ip4r/released/gpdb6/ip4r-(.*).tar.gz
 
 # Other dependencies
-- name: bin_cmake
-  type: gcs
-  source:
-    bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
-    regexp: dependencies/cmake-(.*)-linux-x86_64.sh
-
 - name: slack_notify
   type: slack-alert
   source:
