@@ -1,3 +1,4 @@
+NO_PGXS := 1
 
 MODULE_big = ip4r
 
@@ -11,7 +12,7 @@ SRC_SQL	= ip4r--2.4.sql \
 	  ip4r--unpackaged2.0--2.0.sql \
 	  ip4r--unpackaged1--2.0.sql
 DATA	= $(addprefix scripts/, $(SRC_SQL))
-REGRESS = ip4r $(REGRESS_$(MAJORVERSION))
+REGRESS = ip4r $(REGRESS_$(PG_MAJORVERSION)) ip4r-explain
 REGRESS_11 := ip4r-v11
 REGRESS_12 := $(REGRESS_11)
 else
@@ -26,6 +27,7 @@ DOCS	= README.ip4r
 OBJS_C	= ip4r_module.o ip4r.o ip6r.o ipaddr.o iprange.o raw_io.o
 OBJS	= $(addprefix src/, $(OBJS_C))
 INCS	= ipr.h ipr_internal.h
+SRCDIR = ./
 
 HEADERS = src/ipr.h
 
@@ -38,18 +40,10 @@ VPATH := $(dir $(firstword $(MAKEFILE_LIST)))
 endif
 endif
 
-ifndef NO_PGXS
-PG_CONFIG ?= pg_config
-PGXS = $(shell $(PG_CONFIG) --pgxs)
+PGXS := $(shell pg_config --pgxs)
 include $(PGXS)
-else
-subdir = contrib/ip4r
-top_builddir = ../..
-include $(top_builddir)/src/Makefile.global
-include $(top_srcdir)/contrib/contrib-global.mk
-endif
 
-ifeq ($(filter-out 7.% 8.0 8.1 8.2 8.3, $(MAJORVERSION)),)
+ifeq ($(filter-out 7.% 8.0 8.1 8.2 8.3, $(PG_MAJORVERSION)),)
 $(error unsupported PostgreSQL version)
 endif
 
@@ -68,7 +62,7 @@ endif # VPATH
 
 ifndef EXTENSION
 
-ifeq ($(filter-out 8.4, $(MAJORVERSION)),)
+ifeq ($(filter-out 8.4, $(PG_MAJORVERSION)),)
 
 ip4r.sql.in: $(srcdir)/scripts/ip4r--2.4.sql $(srcdir)/tools/legacy.sed
 	sed -f $(srcdir)/tools/legacy.sed $< | sed -e '/^DO /,/^[$$]/d' >$@
@@ -97,8 +91,7 @@ installcheck:
 endif # VPATH
 
 else
-ifeq ($(filter-out 8.% 9.0, $(MAJORVERSION)),)
+ifeq ($(filter-out 8.% 9.0, $(PG_MAJORVERSION)),)
 $(error extension build not supported in versions before 9.1, use NO_EXTENSION=1)
 endif
 endif
-
