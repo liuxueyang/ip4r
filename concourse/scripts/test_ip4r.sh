@@ -13,12 +13,9 @@ function _main() {
     tar -xzf /home/gpadmin/bin_ip4r/ip4r*.tar.gz -C /usr/local/greenplum-db-devel
     source /home/gpadmin/gpdb_src/gpAux/gpdemo/gpdemo-env.sh
 
-    pushd /home/gpadmin/ip4r_artifacts
+    pushd /home/gpadmin/ip4r_src
     # Show regress diff if test fails
     export SHOW_REGRESS_DIFF=1
-    time make installcheck
-    # Run test again with standby master
-    activate_standby
     time make installcheck
     popd
 }
