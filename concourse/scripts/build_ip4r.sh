@@ -12,7 +12,7 @@ function pkg() {
 
     pushd /home/gpadmin/ip4r_artifacts
     local last_release_path
-    last_release_path=$(readlink -e /home/gpadmin/last_released_ip4r_bin/ip4r-*.tar.gz)
+    # last_release_path=$(readlink -e /home/gpadmin/last_released_ip4r_bin/ip4r-*.tar.gz)
     make clean
     make install
     popd
