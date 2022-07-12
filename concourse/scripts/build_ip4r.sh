@@ -24,6 +24,7 @@ function pkg() {
     pushd /usr/local/greenplum-db-devel/
     echo 'cp -r lib share $GPHOME || exit 1'> install_gpdb_component
     chmod a+x install_gpdb_component
+    mkdir -p $TOP_DIR/bin_ip4r
     tar -czf "$TOP_DIR/bin_ip4r/ip4r_x86_64.tar.gz" \
         "lib/postgresql/ip4r.so" \
         "share/postgresql/extension/ip4r.control" \
