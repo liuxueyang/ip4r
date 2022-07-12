@@ -4,12 +4,11 @@
 # checked.
 
 echo "Disable clang-format"
-exit 0
 
-set -eox pipefail
+# set -eox pipefail
 
-src_dir=$(dirname "${BASH_SOURCE[0]}")/../..
-pushd "${src_dir}"
-git ls-files '*.c' '*.h' | \
-    xargs clang-format --style=file --verbose --Werror -dry-run
-popd
+# src_dir=$(dirname "${BASH_SOURCE[0]}")/../..
+# pushd "${src_dir}"
+# git ls-files '*.c' '*.h' | \
+#     xargs clang-format --style=file --verbose --Werror -dry-run
+# popd
