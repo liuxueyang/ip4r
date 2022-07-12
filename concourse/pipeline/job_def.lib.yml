@@ -227,8 +227,6 @@ plan:
   - get: #@ conf["res_build_image"]
   - get: #@ conf["res_test_image"]
   - get: #@ conf["res_gpdb_bin"]
-  - get: last_released_ip4r_bin
-    resource: #@ conf["res_ip4r_bin"]
 - #@ _build_task(conf)
 - #@ _test_task(conf)
 - put: #@ conf["res_intermediates_bin"]
