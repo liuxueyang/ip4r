@@ -43,9 +43,9 @@ endif
 PGXS := $(shell pg_config --pgxs)
 include $(PGXS)
 
-ifeq ($(filter-out 7.% 8.0 8.1 8.2 8.3, $(MAJORVERSION)),)
-$(error unsupported PostgreSQL version)
-endif
+# ifeq ($(filter-out 7.% 8.0 8.1 8.2 8.3, $(MAJORVERSION)),)
+# $(error unsupported PostgreSQL version)
+# endif
 
 $(OBJS): $(addprefix $(srcdir)/src/, $(INCS))
 
@@ -91,8 +91,8 @@ installcheck:
 endif # VPATH
 
 else
-ifeq ($(filter-out 8.% 9.0, $(MAJORVERSION)),)
-$(error extension build not supported in versions before 9.1, use NO_EXTENSION=1)
-endif
+# ifeq ($(filter-out 8.% 9.0, $(MAJORVERSION)),)
+# $(error extension build not supported in versions before 9.1, use NO_EXTENSION=1)
+# endif
 endif
 
