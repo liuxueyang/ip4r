@@ -5,7 +5,7 @@ inputs:
   - name: bin_gpdb
   - name: ip4r_src
   - name: gpdb_src
-  - name: last_released_ip4r_bin
+  #! - name: last_released_ip4r_bin
 
 outputs:
   - name: ip4r_artifacts

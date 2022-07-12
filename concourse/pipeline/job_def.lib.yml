@@ -15,7 +15,7 @@
 res_build_image: centos6-gpdb6-image-build
 res_test_image: centos6-gpdb6-image-test
 res_gpdb_bin: #@ "bin_gpdb6_centos6" + ("" if release_build else "_debug")
-res_ip4r_bin: bin_ip4r_gpdb6_rhel6
+#! res_ip4r_bin: bin_ip4r_gpdb6_rhel6
 res_intermediates_bin: #@ inter_bin_name("bin_ip4r_gpdb6_rhel6_intermediates", release_build)
 release_bin: bin_ip4r_gpdb6_rhel6_release
 os: rhel6
@@ -227,8 +227,8 @@ plan:
   - get: #@ conf["res_build_image"]
   - get: #@ conf["res_test_image"]
   - get: #@ conf["res_gpdb_bin"]
-  - get: last_released_ip4r_bin
-    resource: #@ conf["res_ip4r_bin"]
+  #! - get: last_released_ip4r_bin
+  #!   resource: #@ conf["res_ip4r_bin"]
 - #@ _build_task(conf)
 - #@ _test_task(conf)
 - put: #@ conf["res_intermediates_bin"]
