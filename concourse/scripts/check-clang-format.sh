@@ -3,6 +3,9 @@
 # only check the format of the git diff. So all the source code are being
 # checked.
 
+echo "Disable clang-format"
+exit 0
+
 set -eox pipefail
 
 src_dir=$(dirname "${BASH_SOURCE[0]}")/../..
