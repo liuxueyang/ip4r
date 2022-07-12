@@ -129,7 +129,7 @@ function create_fake_gpdb_src() {
 
 # Setup common environment
 setup_gpadmin
-install_cmake
+# install_cmake
 install_gpdb
 
 # Do the special setup with root permission for the each task, then run the real task script with
