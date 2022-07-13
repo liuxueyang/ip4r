@@ -36,8 +36,8 @@ function pkg() {
         "share/postgresql/extension/ip4r--unpackaged2.0--2.0.sql" \
         "share/postgresql/extension/ip4r--unpackaged1--2.0.sql" \
         "install_gpdb_component"
-    cp "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz" "$TOP_DIR/ip4r_artifacts/ip4r.tar.gz"
     popd
+    cp "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz" "$TOP_DIR/ip4r_artifacts/ip4r.tar.gz"
 }
 
 function _main() {
