@@ -25,7 +25,7 @@ function pkg() {
     echo 'cp -r lib share $GPHOME || exit 1'> install_gpdb_component
     chmod a+x install_gpdb_component
     mkdir -p $TOP_DIR/ip4r_artifacts
-    tar -czf "$TOP_DIR/ip4r_artifacts/ip4r_x86_64.tar.gz" \
+    tar -czf "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz" \
         "lib/postgresql/ip4r.so" \
         "share/postgresql/extension/ip4r.control" \
         "share/postgresql/extension/ip4r--2.4.sql" \

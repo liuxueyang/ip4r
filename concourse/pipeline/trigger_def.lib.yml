@@ -84,7 +84,6 @@ to_put_post:
 - put: ip4r_commit
   params:
     repository: ip4r_src
-    tag: ip4r_src/VERSION
 on_success:
   put: slack_notify
   params:
