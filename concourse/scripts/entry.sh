@@ -136,6 +136,7 @@ install_gpdb
 # gpadmin. bashrc won't be read by 'su', it needs to be sourced explicitly.
 case "$1" in
     build)
+        touch /home/gpadmin/.bashrc
         su gpadmin -c \
             "source /home/gpadmin/.bashrc &&\
             /home/gpadmin/ip4r_src/concourse/scripts/build_ip4r.sh"
