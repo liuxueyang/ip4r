@@ -25,7 +25,7 @@ resources:
   check_every: 24h
   source:
     disable_forks: false
-    repository: liuxueyang/ip4r
+    repository: greenplum-db/ip4r
     access_token: ((github-access-token))
     base_branch: gpdb
 # Commit trigger
@@ -36,7 +36,7 @@ resources:
   check_every: 1h
   source:
     branch: ((ip4r-branch))
-    uri: https://github.com/liuxueyang/ip4r.git
+    uri: https://github.com/greenplum-db/ip4r.git
     username: ((github-access-token))
     password: x-oauth-basic
 # Commit dev trigger. Not using webhook
@@ -45,7 +45,7 @@ resources:
   check_every: 1m
   source:
     branch: ((ip4r-branch))
-    uri: https://github.com/liuxueyang/ip4r.git
+    uri: https://github.com/greenplum-db/ip4r.git
     username: ((github-access-token))
     password: x-oauth-basic
 
