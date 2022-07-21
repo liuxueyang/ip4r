@@ -12,7 +12,7 @@ SRC_SQL	= ip4r--2.4.sql \
 	  ip4r--unpackaged2.0--2.0.sql \
 	  ip4r--unpackaged1--2.0.sql
 DATA	= $(addprefix scripts/, $(SRC_SQL))
-REGRESS = ip4r $(REGRESS_$(MAJORVERSION)) ip4r-explain
+REGRESS = ip4r $(REGRESS_$(PG_MAJORVERSION)) ip4r-explain
 REGRESS_11 := ip4r-v11
 REGRESS_12 := $(REGRESS_11)
 else
@@ -43,9 +43,9 @@ endif
 PGXS := $(shell pg_config --pgxs)
 include $(PGXS)
 
-# ifeq ($(filter-out 7.% 8.0 8.1 8.2 8.3, $(MAJORVERSION)),)
-# $(error unsupported PostgreSQL version)
-# endif
+ifeq ($(filter-out 7.% 8.0 8.1 8.2 8.3, $(PG_MAJORVERSION)),)
+$(error unsupported PostgreSQL version)
+endif
 
 $(OBJS): $(addprefix $(srcdir)/src/, $(INCS))
 
@@ -62,7 +62,7 @@ endif # VPATH
 
 ifndef EXTENSION
 
-ifeq ($(filter-out 8.4, $(MAJORVERSION)),)
+ifeq ($(filter-out 8.4, $(PG_MAJORVERSION)),)
 
 ip4r.sql.in: $(srcdir)/scripts/ip4r--2.4.sql $(srcdir)/tools/legacy.sed
 	sed -f $(srcdir)/tools/legacy.sed $< | sed -e '/^DO /,/^[$$]/d' >$@
@@ -91,8 +91,7 @@ installcheck:
 endif # VPATH
 
 else
-# ifeq ($(filter-out 8.% 9.0, $(MAJORVERSION)),)
-# $(error extension build not supported in versions before 9.1, use NO_EXTENSION=1)
-# endif
+ifeq ($(filter-out 8.% 9.0, $(PG_MAJORVERSION)),)
+$(error extension build not supported in versions before 9.1, use NO_EXTENSION=1)
 endif
-
+endif
