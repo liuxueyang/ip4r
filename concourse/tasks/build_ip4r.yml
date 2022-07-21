@@ -1,0 +1,19 @@
+platform: linux
+image_resource:
+  type: docker-image
+inputs:
+  - name: bin_gpdb
+  - name: ip4r_src
+  - name: gpdb_src
+  #! - name: last_released_ip4r_bin
+
+outputs:
+  - name: ip4r_artifacts
+
+run:
+  path: ip4r_src/concourse/scripts/entry.sh
+  args:
+    - build
+params:
+  IP4R_OS:
+  BUILD_TYPE:
