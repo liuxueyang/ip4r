@@ -904,8 +904,9 @@ ip4r_cast_to_bit(PG_FUNCTION_ARGS)
 	unsigned char buf[4];
 	int len;
 
-    if (bits > 32)
+    if (bits > 32) {
         PG_RETURN_NULL();
+    }
 
 	len = VARBITTOTALLEN(bits);
     res = palloc0(len);

@@ -978,8 +978,9 @@ ip6r_cast_to_bit(PG_FUNCTION_ARGS)
 	unsigned char buf[16];
 	int len;
 
-    if (bits > 128)
+    if (bits > 128) {
         PG_RETURN_NULL();
+    }
 
 	len = VARBITTOTALLEN(bits);
     res = palloc0(len);
