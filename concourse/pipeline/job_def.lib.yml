@@ -58,48 +58,6 @@ os: ubuntu18.04
 build_type: #@ "Release" if release_build else "Debug"
 #@ end
 
-#! The entry point of a pipeline. The job name must be 'entrance'.
-#@ def entrance_job(param):
-#@   trigger = param["trigger"]
-name: entrance
-on_failure: #@ trigger["on_failure"]
-on_error: #@ trigger["on_error"]
-plan:
-#@   for to_get in trigger["to_get"]:
-- trigger: #@ trigger["auto_trigger"]
-  _: #@ template.replace(to_get)
-#@   end
-#@   for to_put in trigger["to_put_pre"]:
-- #@ to_put
-#@   end
-#@ end
-
-#! Like the entrance_job, with more static checks.
-#@ def entrance_check_job(param):
-#@   add_res_by_name(param["res_map"], "clang-format-image")
-#@   trigger = param["trigger"]
-name: entrance
-on_failure: #@ trigger["on_failure"]
-on_error: #@ trigger["on_error"]
-plan:
-#@   for to_get in trigger["to_get"]:
-- trigger: #@ trigger["auto_trigger"]
-  _: #@ template.replace(to_get)
-#@   end
-#@   for to_put in trigger["to_put_pre"]:
-- #@ to_put
-#@   end
-- get: clang-format-image
-- task: check_clang_format
-  image: clang-format-image
-  config:
-    inputs:
-      - name: ip4r_src
-    platform: linux
-    run:
-      path: ip4r_src/concourse/scripts/check-clang-format.sh
-#@ end
-
 #@ def exit_job(param):
 #@   trigger = param["trigger"]
 #@   confs = param["confs"]
@@ -217,8 +175,7 @@ on_failure: #@ trigger["on_failure"]
 on_error: #@ trigger["on_error"]
 plan:
 #@   for to_get in trigger["to_get"]:
-- passed: [entrance]
-  trigger: true
+- trigger: true
   _: #@ template.replace(to_get)
 #@   end
 - in_parallel:
