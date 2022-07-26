@@ -10,10 +10,6 @@ function pkg() {
     [ -f /opt/gcc_env.sh ] && source /opt/gcc_env.sh
     source /usr/local/greenplum-db-devel/greenplum_path.sh
 
-    if [ "${OS_NAME}" = "rhel6" ]; then
-        export CC="$(which gcc)"
-    fi
-
     pushd /home/gpadmin/ip4r_src
     make clean
     make install
