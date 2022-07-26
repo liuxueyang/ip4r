@@ -21,7 +21,7 @@ function pkg() {
 
     mkdir -p $TOP_DIR/ip4r_artifacts
 
-    ./pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz"
+    $CWDIR/pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz"
     cp "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz" "$TOP_DIR/ip4r_artifacts/ip4r.tar.gz"
 }
 
