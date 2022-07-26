@@ -19,10 +19,10 @@ function pkg() {
     make install
     popd
 
-    mkdir -p $TOP_DIR/ip4r_artifacts
+    mkdir -p $TOP_DIR/bin_ip4r
 
-    $CWDIR/pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz"
-    cp "$TOP_DIR/ip4r_artifacts/ip4r-${IP4R_OS}_x86_64.tar.gz" "$TOP_DIR/ip4r_artifacts/ip4r.tar.gz"
+    $CWDIR/pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/bin_ip4r/ip4r-${IP4R_OS}_x86_64.tar.gz"
+    cp "$TOP_DIR/bin_ip4r/ip4r-${IP4R_OS}_x86_64.tar.gz" "$TOP_DIR/bin_ip4r/ip4r.tar.gz"
 }
 
 function _main() {

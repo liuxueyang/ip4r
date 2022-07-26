@@ -154,7 +154,6 @@ file: ip4r_src/concourse/tasks/test_ip4r.yml
 image: #@ conf["res_test_image"]
 input_mapping:
   bin_gpdb: #@ conf["res_gpdb_bin"]
-  bin_ip4r: ip4r_artifacts
 params:
   IP4R_OS: #@ conf["os"]
 #@ end
@@ -190,5 +189,5 @@ plan:
 - #@ _test_task(conf)
 - put: #@ conf["res_intermediates_bin"]
   params:
-    file: ip4r_artifacts/ip4r.tar.gz
+    file: bin_ip4r/ip4r.tar.gz
 #@ end
