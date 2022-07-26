@@ -138,7 +138,20 @@ plan:
 
 #@ def _build_task(conf):
 task: #@ "build_" + conf["os"]
-file: ip4r_src/concourse/tasks/build_ip4r.yml
+config:
+  platform: linux
+  image_resource:
+    type: docker-image
+  inputs:
+    - name: bin_gpdb
+    - name: ip4r_src
+    - name: gpdb_src
+  outputs:
+    - name: bin_ip4r
+  run:
+    path: ip4r_src/concourse/scripts/entry.sh
+    args:
+      - build
 image: #@ conf["res_build_image"]
 input_mapping:
   bin_gpdb: #@ conf["res_gpdb_bin"]
@@ -149,7 +162,19 @@ params:
 #@ def _test_task(conf):
 task: #@ "test_" + conf["os"]
 timeout: 2h
-file: ip4r_src/concourse/tasks/test_ip4r.yml
+config:
+  platform: linux
+  image_resource:
+    type: docker-image
+  inputs:
+    - name: bin_gpdb
+    - name: ip4r_src
+    - name: bin_ip4r
+    - name: gpdb_src
+  run:
+    path: ip4r_src/concourse/scripts/entry.sh
+    args:
+      - test
 image: #@ conf["res_test_image"]
 input_mapping:
   bin_gpdb: #@ conf["res_gpdb_bin"]
