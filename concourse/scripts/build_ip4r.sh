@@ -10,7 +10,7 @@ function pkg() {
     [ -f /opt/gcc_env.sh ] && source /opt/gcc_env.sh
     source /usr/local/greenplum-db-devel/greenplum_path.sh
 
-    if [ "${IP4R_OS}" = "rhel6" ]; then
+    if [ "${OS_NAME}" = "rhel6" ]; then
         export CC="$(which gcc)"
     fi
 
@@ -21,8 +21,8 @@ function pkg() {
 
     mkdir -p $TOP_DIR/bin_ip4r
 
-    $CWDIR/pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/bin_ip4r/ip4r-${IP4R_OS}_x86_64.tar.gz"
-    cp "$TOP_DIR/bin_ip4r/ip4r-${IP4R_OS}_x86_64.tar.gz" "$TOP_DIR/bin_ip4r/ip4r.tar.gz"
+    $CWDIR/pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/bin_ip4r/ip4r-${OS_NAME}_x86_64.tar.gz"
+    cp "$TOP_DIR/bin_ip4r/ip4r-${OS_NAME}_x86_64.tar.gz" "$TOP_DIR/bin_ip4r/ip4r.tar.gz"
 }
 
 function _main() {

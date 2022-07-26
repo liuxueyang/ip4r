@@ -26,7 +26,7 @@ fi
 _determine_os() {
   local name version
   if [ -f /etc/redhat-release ]; then
-    name="centos"
+    name="rhel"
     version=$(sed </etc/redhat-release 's/.*release *//' | cut -f1 -d.)
   elif [ -f /etc/SuSE-release ]; then
     name="sles"
@@ -43,6 +43,8 @@ _determine_os() {
   fi
   echo "${name}${version}"
 }
+
+OS_NAME=$(_determine_os)
 
 # Global ENV defines
 # /tmp/build/xxxxx. it should not be used in normal conditions. Use /home/gpadmin instead.
@@ -68,7 +70,7 @@ setup_gpadmin() {
         # Below is copied from setup_gpadmin_user.bash
         groupadd supergroup
         case "$test_os" in
-            centos*)
+            rhel*)
                 /usr/sbin/useradd -G supergroup,tty gpadmin
                 ;;
             ubuntu*)
@@ -100,9 +102,18 @@ function install_gpdb() {
     chown -R gpadmin:gpadmin /usr/local/greenplum-db-devel
 }
 
+function setup_gpadmin_bashrc() {
+    {
+        echo "source /usr/local/greenplum-db-devel/greenplum_path.sh"
+        echo "export OS_NAME=${OS_NAME}"
+        echo "export PATH=${CMAKE_HOME}/bin:\$PATH"
+    } >> /home/gpadmin/.bashrc
+}
+
 # Setup common environment
 setup_gpadmin
 install_gpdb
+setup_gpadmin_bashrc
 
 # Do the special setup with root permission for the each task, then run the real task script with
 # gpadmin. bashrc won't be read by 'su', it needs to be sourced explicitly.

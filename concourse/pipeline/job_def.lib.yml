@@ -143,7 +143,6 @@ image: #@ conf["res_build_image"]
 input_mapping:
   bin_gpdb: #@ conf["res_gpdb_bin"]
 params:
-  IP4R_OS: #@ conf["os"]
   BUILD_TYPE: #@ conf["build_type"]
 #@ end
 
@@ -154,8 +153,6 @@ file: ip4r_src/concourse/tasks/test_ip4r.yml
 image: #@ conf["res_test_image"]
 input_mapping:
   bin_gpdb: #@ conf["res_gpdb_bin"]
-params:
-  IP4R_OS: #@ conf["os"]
 #@ end
 
 #@ def build_test_job_name(conf):

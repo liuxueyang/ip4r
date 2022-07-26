@@ -11,5 +11,3 @@ run:
   path: ip4r_src/concourse/scripts/entry.sh
   args:
     - test
-params:
-  IP4R_OS:
