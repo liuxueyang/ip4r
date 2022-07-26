@@ -14,8 +14,6 @@ function _main() {
     source /home/gpadmin/gpdb_src/gpAux/gpdemo/gpdemo-env.sh
 
     pushd /home/gpadmin/ip4r_src
-    # Show regress diff if test fails
-    export SHOW_REGRESS_DIFF=1
     time make installcheck
     popd
 }
