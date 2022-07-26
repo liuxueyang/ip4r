@@ -1,4 +1,5 @@
 #@ load("job_def.lib.yml",
+#@   "entrance_check_job",
 #@   "build_test_job",
 #@   "centos6_gpdb6_conf",
 #@   "centos7_gpdb6_conf",
@@ -19,6 +20,11 @@
 #@   ubuntu18_gpdb6_conf(release_build=False)
 #@ ]
 jobs:
+#@ param = {
+#@     "res_map": res_map,
+#@     "trigger": trigger,
+#@ }
+- #@ entrance_check_job(param)
 #@ for conf in confs:
 #@   param = {
 #@     "res_map": res_map,
