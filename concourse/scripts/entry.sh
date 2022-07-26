@@ -100,33 +100,6 @@ function install_gpdb() {
     chown -R gpadmin:gpadmin /usr/local/greenplum-db-devel
 }
 
-## Currently, isolation2 testing framework relies on pg_isolation2_regress, we
-## should build it from source. However, in concourse, the gpdb_bin is fetched
-## from remote machine, the $(abs_top_srcdir) variable points to a non-existing
-## location, we fixes this issue by creating a symbolic link for it.
-# function create_fake_gpdb_src() {
-#     local fake_gpdb_src
-#     fake_gpdb_src="$(\
-#         grep -rhw '/usr/local/greenplum-db-devel' -e 'abs_top_srcdir = .*' |\
-#         head -n 1 | awk '{ print $NF; }')"
-
-#     if [ -d "${fake_gpdb_src}" ]; then
-#         echo "Fake gpdb source directory has been configured."
-#         return
-#     fi
-
-#     pushd /home/gpadmin/gpdb_src
-#     ./configure --prefix=/usr/local/greenplum-db-devel \
-#         --without-zstd \
-#         --disable-orca --disable-gpcloud --enable-debug-extensions
-#     popd
-
-#     local fake_root
-#     fake_root=$(dirname "${fake_gpdb_src}")
-#     mkdir -p "${fake_root}"
-#     ln -s /home/gpadmin/gpdb_src "${fake_gpdb_src}"
-# }
-
 # Setup common environment
 setup_gpadmin
 install_gpdb
@@ -141,11 +114,6 @@ case "$1" in
             /home/gpadmin/ip4r_src/concourse/scripts/build_ip4r.sh"
         ;;
     test)
-        # Build task output is ip4r_artifacts, which is different from test taks input
-        # ip4r_bin. Ideally we can use the same name for input and output. But that will cause
-        # compatible issues with 1.x pipeline script.
-        # ln -s /home/gpadmin/bin_ip4r /home/gpadmin/ip4r_artifacts
-        # create_fake_gpdb_src
         # Create GPDB cluster
         source "/home/gpadmin/gpdb_src/concourse/scripts/common.bash"
         make_cluster
