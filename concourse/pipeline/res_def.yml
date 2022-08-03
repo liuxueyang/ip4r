@@ -21,23 +21,23 @@ resources:
 - name: ip4r_pr
   type: pull-request
   # We should rely on the webhook. See README if webhook doesn't work
-  webhook_token: ((ip4r-webhook-token))
+  webhook_token: ((extension/extensions-webhook-token))
   check_every: 24h
   source:
     disable_forks: false
     repository: greenplum-db/ip4r
-    access_token: ((github-access-token))
+    access_token: ((extension/github-access-token))
     base_branch: gpdb
 # Commit trigger
 - name: ip4r_commit
   type: git
   # We should rely on the webhook. See README if webhook doesn't work
-  webhook_token: ((ip4r-webhook-token))
+  webhook_token: ((extension/extensions-webhook-token))
   check_every: 1h
   source:
     branch: ((ip4r-branch))
     uri: https://github.com/greenplum-db/ip4r.git
-    username: ((github-access-token))
+    username: ((extension/github-access-token))
     password: x-oauth-basic
 # Commit dev trigger. Not using webhook
 - name: ip4r_commit_dev
@@ -46,7 +46,7 @@ resources:
   source:
     branch: ((ip4r-branch))
     uri: https://github.com/greenplum-db/ip4r.git
-    username: ((github-access-token))
+    username: ((extension/github-access-token))
     password: x-oauth-basic
 
 
@@ -87,14 +87,14 @@ resources:
     repository: gcr.io/data-gpdb-private-images/gpdb6-rhel8-build
     tag: latest
     username: _json_key
-    password: ((container-registry-readonly-service-account-key))
+    password: ((data-gpdb-private-images-container-registry-readonly-service-account-key))
 - name: rhel8-gpdb6-image-test
   type: registry-image
   source:
     repository: gcr.io/data-gpdb-private-images/gpdb6-rhel8-test
     tag: latest
     username: _json_key
-    password: ((container-registry-readonly-service-account-key))
+    password: ((data-gpdb-private-images-container-registry-readonly-service-account-key))
 # Ubuntu18
 - name: ubuntu18-gpdb6-image-build
   type: registry-image
@@ -196,28 +196,28 @@ resources:
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates/ip4r/ip4r_rhel6_gpdb6.tar.gz
 
 - name: bin_ip4r_gpdb6_rhel7_intermediates
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates/ip4r/ip4r_rhel7_gpdb6.tar.gz
 
 - name: bin_ip4r_gpdb6_rhel8_intermediates
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates/ip4r/ip4r_rhel8_gpdb6.tar.gz
 
 - name: bin_ip4r_gpdb6_ubuntu18_intermediates
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates/ip4r/ip4r_ubuntu18_gpdb6.tar.gz
 
 # Rel
@@ -225,28 +225,28 @@ resources:
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates_release/ip4r/ip4r_rhel6_gpdb6.tar.gz
 
 - name: bin_ip4r_gpdb6_rhel7_intermediates_rel
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates_release/ip4r/ip4r_rhel7_gpdb6.tar.gz
 
 - name: bin_ip4r_gpdb6_rhel8_intermediates_rel
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates_release/ip4r/ip4r_rhel8_gpdb6.tar.gz
 
 - name: bin_ip4r_gpdb6_ubuntu18_intermediates_rel
   type: gcs
   source:
     bucket: gpdb-extensions-concourse-resources
-    json_key: ((extensions-gcs-service-account-key))
+    json_key: ((extension/extensions-gcs-service-account-key))
     versioned_file: intermediates_release/ip4r/ip4r_ubuntu18_gpdb6.tar.gz
 
 # For uploading to the release bucket
@@ -282,4 +282,4 @@ resources:
 - name: slack_notify
   type: slack-alert
   source:
-    url: ((extensions-slack-webhook))
+    url: ((extension/extensions-slack-webhook))
