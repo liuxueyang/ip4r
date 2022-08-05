@@ -17,8 +17,9 @@ function pkg() {
 
     mkdir -p $TOP_DIR/bin_ip4r
 
-    $CWDIR/pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/bin_ip4r/ip4r-${OS_NAME}_x86_64.tar.gz"
-    cp "$TOP_DIR/bin_ip4r/ip4r-${OS_NAME}_x86_64.tar.gz" "$TOP_DIR/bin_ip4r/ip4r.tar.gz"
+    CURRENT_VERSION=$(cat /home/gpadmin/ip4r_src/VERSION)
+    $CWDIR/pack.sh -p /usr/local/greenplum-db-devel/ -f "$TOP_DIR/bin_ip4r/ip4r-${CURRENT_VERSION}-${OS_NAME}_x86_64.tar.gz"
+    cp "$TOP_DIR/bin_ip4r/ip4r-${CURRENT_VERSION}-${OS_NAME}_x86_64.tar.gz" "$TOP_DIR/bin_ip4r/ip4r.tar.gz"
 }
 
 function _main() {
