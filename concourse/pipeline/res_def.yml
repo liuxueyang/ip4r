@@ -36,7 +36,7 @@ resources:
   check_every: 1h
   source:
     branch: ((ip4r-branch))
-    uri: https://github.com/liuxueyang/ip4r.git
+    uri: https://github.com/greenplum-db/ip4r.git
     username: ((extension/github-access-token))
     password: x-oauth-basic
 # Commit dev trigger. Not using webhook
