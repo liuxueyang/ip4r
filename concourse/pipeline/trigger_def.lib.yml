@@ -85,7 +85,7 @@ to_put_post:
   params:
     repository: ip4r_src
     tag: ip4r_src/VERSION
-    tag_prefix: gpdb
+    tag_prefix: gpdb-
 on_success:
   put: slack_notify
   params:
